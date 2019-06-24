@@ -1,0 +1,14 @@
+======================================================================================================================================================================================================
+1. Connect to the server via SSH.
+2. Create backup folder:
+# mkdir  /root/mysqlbackup
+3. Get the list of all databases:
+# cd /root/mysqlbackup
+# plesk db -e "show databases" | grep -v -E "^Database|information_schema|performance_schema|phpmyadmin" > dblist.txt
+4. Perform database dumping:
+# cat /root/mysqlbackup/dblist.txt | while read i; do plesk db dump "$i" > /root/mysqlbackup/"$i".sql; done
+======================================================================================================================================================================================================
+To restore the databases from the dumps use the following command:
+======================================================================================================================================================================================================
+# for i in `cat /root/mysqlbackup/dblist.txt`; do MYSQL_PWD=`cat /etc/psa/.psa.shadow` mysql -u admin < /root/mysqlbackup/"$i".sql; done
+=======================================================================================================================================================
