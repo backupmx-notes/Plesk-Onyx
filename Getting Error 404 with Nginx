@@ -1,0 +1,17 @@
+If run wordpress with Nginx 
+For one website
+Log in to Plesk.
+Add the content below to the Additional nginx directives field in Plesk at Domains > example.com > Apache & nginx Settings:
+======================================================================================================================================================================================================
+if (!-e $request_filename) { 
+set $test P; 
+}
+if ($uri !~ ^/(plesk-stat|webstat|webstat-ssl|ftpstat|anon_ftpstat|awstats-icon|internal-nginx-static-location)) { 
+set $test "${test}C"; 
+} 
+if ($test = PC) { 
+rewrite ^/(.*)$ /index.php?$1; 
+}
+======================================================================================================================================================================================================
+Why need above code, because when you changed the webite from apache to nginx the website will start throwing the 404 casue .htaccess does not work with nginx without 
+using above code.
