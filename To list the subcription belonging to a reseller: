@@ -1,0 +1,14 @@
+======================================================================================================================================================================================================
+Replace 'asd' with the actual reseller name
+
+outputt would be like below
+
+#plesk db -e "select group_concat(c.pname) as 'Clients',c1.pname as 'Reseller' from clients c left join clients c1 on c.vendor_id = c1.id where c.vendor_id > 1 and c1.pname = 'Sudheesh' group by c.vendor_id"
++----------------------------------------------------------------------------+----------+
+| Clients                                                                    | Reseller |
++----------------------------------------------------------------------------+----------+
+| anoop,kausongroup,DhanyaVineeth,Nexlife,pradoworld,fmcalls,Sudheesh Pattva | Sudheesh |
++----------------------------------------------------------------------------+----------+
+1 row in set (0.00 sec)
+
+=========================================================================================================
