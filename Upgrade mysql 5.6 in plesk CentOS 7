@@ -1,0 +1,28 @@
+======================================================================================================================================================================================================
+Reference : https://talk.plesk.com/threads/magento-2-needs-mysql-5-6-can-not-install-ans-plesk-wont-help.336442/#post-794177
+
+1. Make server backup if possible, or backup all of your MySQL databases.
+2. Install Plesk updates using autoinstaller.
+3. # yum update
+4. Remove mariabd without dependencies:
+
+# rpm -e --nodeps mariadb mariadb-server mariadb-libs
+
+5. Install MySQL community repository:
+
+# rpm -i http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
+
+6. Install MySQL 5.6
+
+# yum install mysql-server
+
+7.
+# ln -s /usr/lib/systemd/system/mysqld.service /usr/lib/systemd/system/mariadb.service
+# ln -s /etc/systemd/system/multi-user.target.wants/mysqld.service /etc/systemd/system/multi-user.target.wants/mariadb.service
+# systemctl daemon-reload
+
+# systemctl status mysql
+# systemctl restart mysql
+
+8. # mysql_upgrade -uadmin -p`cat /etc/psa/.psa.shadow` 
+====================================================================================================================================================================
