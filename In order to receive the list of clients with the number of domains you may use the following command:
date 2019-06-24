@@ -1,0 +1,6 @@
+# plesk db -e "select c.pname from domains d right join clients c on d.cl_id=c.id" | uniq -c | sort -r
+The output will look like:
+
+# plesk db -e "select c.pname from domains d right join clients c on d.cl_id=c.id" | uniq -c | sort -r
+      6 Arvind
+      2 Demo_user
