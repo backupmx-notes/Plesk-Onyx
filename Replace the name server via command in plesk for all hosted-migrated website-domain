@@ -1,0 +1,5 @@
+====================================================================================================================================
+update dns_recs set displayVal='new1.nameserver.net.', val='new1.nameserver.net.' where displayVal='old1.nameserver.net.' and type='NS';
+
+update dns_recs set displayVal='new2.nameserver.net.', val='new2.nameserver.net.' where displayVal='old2.nameserver.net.' and type='NS';
+====================================================================================================================================
