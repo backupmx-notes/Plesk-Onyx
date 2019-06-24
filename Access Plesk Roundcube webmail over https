@@ -1,0 +1,30 @@
+====================================================================================================================================
+For Plesk Onyx: Roundcube webmail
+Connect to a Plesk server via SSH.
+
+Open the file roundcube.htaccess.inc in a text editor (for example, "vi" editor). The location of this file is:
+
+for CentOS/RHEL-based distributions:
+
+/etc/httpd/conf/plesk.conf.d/roundcube.htaccess.inc
+
+for Debian/Ubuntu-based distributions:
+
+/etc/apache2/plesk.conf.d/roundcube.htaccess.inc
+
+Insert the text below in the <IfModule mod_rewrite.c> section:
+
+<IfModule mod_rewrite.c>
+...
+RewriteCond %{REQUEST_URI} !^/\.well\-known/acme\-challenge/
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,QSA]
+</IfModule>
+
+Save the changes and close the file.
+
+Restart Apache:
+
+for CentOS/RHEL-based distributions:
+
+service httpd restart
